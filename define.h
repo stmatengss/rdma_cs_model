@@ -1,5 +1,5 @@
 
-const int iter_num = 10;
+const int iter_num = 10000;
 
 #include<time.h>
 
