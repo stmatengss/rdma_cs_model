@@ -1,0 +1,79 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+EXE	Makefile	/^EXE = rdma_server_w rdma_client_w rdma_server_rc rdma_client_rc rdma_client_rc_us rdma_server_rc_us \\$/;"	m
+buffer_addr	rdma_client_rc_w.c	/^		uint64_t buffer_addr;$/;"	m	struct:common_priv_data	file:
+buffer_addr	rdma_server_rc_w.c	/^		uint64_t buffer_addr;$/;"	m	struct:common_priv_data	file:
+buffer_length	rdma_client_rc_w.c	/^		size_t   buffer_length;$/;"	m	struct:common_priv_data	file:
+buffer_length	rdma_server_rc_w.c	/^		size_t   buffer_length;$/;"	m	struct:common_priv_data	file:
+buffer_rkey	rdma_client_rc_w.c	/^		uint32_t buffer_rkey;$/;"	m	struct:common_priv_data	file:
+buffer_rkey	rdma_server_rc_w.c	/^		uint32_t buffer_rkey;$/;"	m	struct:common_priv_data	file:
+common_priv_data	rdma_client_rc_w.c	/^struct common_priv_data {$/;"	s	file:
+common_priv_data	rdma_server_rc_w.c	/^struct common_priv_data {$/;"	s	file:
+id	rdma_client_rc.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
+id	rdma_client_rc_us.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
+id	rdma_client_rc_w.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
+id	rdma_client_w.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
+id	rdma_server_rc.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
+id	rdma_server_rc_us.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
+id	rdma_server_rc_w.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
+id	rdma_server_w.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
+iter_num	define.h	/^const int iter_num = 10000;$/;"	v
+listen_id	rdma_server_rc.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
+listen_id	rdma_server_rc_us.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
+listen_id	rdma_server_rc_w.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
+listen_id	rdma_server_w.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
+main	rdma_client_rc.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_client_rc_us.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_client_rc_w.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_client_w.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_server_rc.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_server_rc_us.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_server_rc_w.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_server_w.c	/^int main(int argc, char **argv)$/;"	f
+mr	rdma_client_rc.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_client_rc_us.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_client_rc_w.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_client_w.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_server_rc.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_server_rc_us.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_server_rc_w.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_server_w.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+port	rdma_client_rc.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_client_rc_us.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_client_rc_w.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_client_w.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_server_rc.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_server_rc_us.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_server_rc_w.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_server_w.c	/^static char *port = "7471";$/;"	v	file:
+recv_msg	rdma_client_rc.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_client_rc_us.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_client_w.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_server_rc.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_server_rc_us.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_server_w.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+run	rdma_client_rc.c	/^static int run(void)$/;"	f	file:
+run	rdma_client_rc_us.c	/^static int run(void)$/;"	f	file:
+run	rdma_client_rc_w.c	/^static int run(void)$/;"	f	file:
+run	rdma_client_w.c	/^static int run(void)$/;"	f	file:
+run	rdma_server_rc.c	/^static int run(void)$/;"	f	file:
+run	rdma_server_rc_us.c	/^static int run(void)$/;"	f	file:
+run	rdma_server_rc_w.c	/^static int run(void)$/;"	f	file:
+run	rdma_server_w.c	/^static int run(void)$/;"	f	file:
+send_msg	rdma_client_rc.c	/^char send_msg[16] = "hello world\\0";$/;"	v
+send_msg	rdma_client_rc_us.c	/^char send_msg[16] = "hello world\\0";$/;"	v
+send_msg	rdma_client_w.c	/^char send_msg[16] = "hello world\\0";$/;"	v
+send_msg	rdma_server_rc.c	/^char send_msg[16] = "hello world:";$/;"	v
+send_msg	rdma_server_rc_us.c	/^char send_msg[16] = "hello world:";$/;"	v
+send_msg	rdma_server_w.c	/^char send_msg[16] = "hello world:";$/;"	v
+server	rdma_client_rc.c	/^static char *server = "127.0.0.1";$/;"	v	file:
+server	rdma_client_rc_us.c	/^static char *server = "127.0.0.1";$/;"	v	file:
+server	rdma_client_rc_w.c	/^static char *server = "127.0.0.1";$/;"	v	file:
+server	rdma_client_w.c	/^static char *server = "127.0.0.1";$/;"	v	file:
+time_sec	define.h	6;"	d
+wr_msg	rdma_client_rc_w.c	/^char wr_msg[16] = "hello world\\0";$/;"	v
+wr_msg	rdma_server_rc_w.c	/^char wr_msg[16] = "hello world:";$/;"	v
