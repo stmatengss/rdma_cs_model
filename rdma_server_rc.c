@@ -139,8 +139,36 @@ static int run(void)
 */
 		rdma_freeaddrinfo(res);
 
+
+		struct ibv_pd *pd;
+		pd = ibv_alloc_pd(id->verbs);
+		if (!pd) {
+				printf("ibv_alloc_pd: %s\n", strerror(errno));
+				return 1;
+		}
+
+		struct ibv_comp_channel *comp_channel;
+		comp_channel = ibv_create_comp_channel(id->verbs);
+		if (!comp_channel) {
+				printf("ibv_create_comp_channel: %s\n", strerror(errno));
+				return 1;
+		}
+
+		struct ibv_cq *cq;
+		cq = ibv_create_cq(id->verbs, 2, NULL, comp_channel, 0);
+		if (!cq) {
+				printf("ibv_create_cq %s\n", strerror(errno));
+				return 1;
+		}
+
+		ret = ibv_req_notify_cq(cq, 0);
+		if (ret) {
+				printf("ibv_req_notify_cq: %s\n", strerror(errno));
+				return ret;
+		}
+
 		PRINT_LINE
-		ret = rdma_create_qp(id, NULL, &attr); 
+		ret = rdma_create_qp(id, pd, &attr); 
 		if (ret) {
 				printf("rdma_create_qp: %s\n", strerror(errno));
 				return ret;
