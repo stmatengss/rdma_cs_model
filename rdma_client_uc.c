@@ -1,7 +1,7 @@
 /*************************************************************************
  *   > File Name: 
  *   > Author: stmatengss
- *   > Mail: stmatengss@163.com 
+ *   > Mail: stmatengss@MESSAGE_LEN3.com 
  *   > Created Time: 2017年01月04日 星期三 10时41分04秒
  *************************************************************************/
 #include <stdio.h>
@@ -18,8 +18,8 @@ static char *port = "7471";
 
 struct rdma_cm_id *id;
 struct ibv_mr *mr;
-char send_msg[16] = "hello world\0";
-char recv_msg[16] = "fuck\0";
+char send_msg[MESSAGE_LEN] = "hello world\0";
+char recv_msg[MESSAGE_LEN] = "fuck\0";
 
 static int run(void)
 {
@@ -29,6 +29,7 @@ static int run(void)
 	int ret;
 
 	memset(&hints, 0, sizeof hints);
+//	hints.ai_port_space = RDMA_PS_IB;
 	hints.ai_port_space = RDMA_PS_TCP;
 	//hints.ai_port_space = RDMA_PS_UDP;
 	ret = rdma_getaddrinfo(server, port, &hints, &res);
@@ -38,12 +39,12 @@ static int run(void)
 	}
 
 	memset(&attr, 0, sizeof attr);
-	attr.cap.max_send_wr = attr.cap.max_recv_wr = 10000;
+	attr.cap.max_send_wr = attr.cap.max_recv_wr = iter_num;
 	attr.cap.max_send_sge = attr.cap.max_recv_sge = 1;
-	attr.cap.max_inline_data = 16;
+	attr.cap.max_inline_data = MESSAGE_LEN;
 	attr.qp_type = IBV_QPT_RC;
 	attr.qp_context = id;
-	attr.sq_sig_all = 1;
+	attr.sq_sig_all = 0;
 	ret = rdma_create_ep(&id, res, NULL, &attr);
 	
 	rdma_freeaddrinfo(res);
@@ -54,7 +55,7 @@ static int run(void)
 
 	printf("inf(pre):%s\n", recv_msg);
 
-	mr = rdma_reg_msgs(id, recv_msg, 16);
+	mr = rdma_reg_msgs(id, recv_msg, MESSAGE_LEN);
 	if (!mr) {
 		printf("rdma_reg_msgs %d\n", errno);
 
@@ -71,7 +72,7 @@ static int run(void)
 	int i;
 	clock_t begin_time = clock();
 /*	
-	ret = rdma_post_recv(id, NULL, recv_msg, 16, mr);
+	ret = rdma_post_recv(id, NULL, recv_msg, MESSAGE_LEN, mr);
 	if (ret) {
 			printf("rdma_post_recv %d\n", errno);
 			return ret;
@@ -85,9 +86,9 @@ static int run(void)
 			return 1;
 		}
 */
-		ret = rdma_post_recv(id, NULL, recv_msg, 16, mr);
+		ret = rdma_post_recv(id, NULL, recv_msg, MESSAGE_LEN, mr);
 		if (ret) {
-			printf("rdma_post_recv %d\n", errno);
+			printf("rdma_post_recv %s\n", strerror(errno));
 			return ret;
 		}
 
@@ -96,7 +97,7 @@ static int run(void)
 
 	ret = rdma_connect(id, NULL);
 	if (ret) {
-		printf("rdma_connect %s\n", strerror(errno));
+		printf("rdma_connect %d\n", ret);
 		return 1;
 	}
 
@@ -109,6 +110,7 @@ static int run(void)
 //			printf("inf(after):%s\n", recv_msg);
 	}
 
+	printf("inf(after):%s\n", recv_msg);
 	clock_t end_time = clock();
 
 	printf("Total time is %ld\n", (end_time - begin_time) * 1000 / CLOCKS_PER_SEC);

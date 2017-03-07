@@ -1,7 +1,7 @@
 /*************************************************************************
  *   > File Name: 
  *   > Author: stmatengss
- *   > Mail: stmatengss@163.com 
+ *   > Mail: stmatengss@MESSAGE_LEN3.com 
  *   > Created Time: 2017年01月04日 星期三 10时41分04秒
  *************************************************************************/
 #include <stdio.h>
@@ -17,14 +17,13 @@
 
 static char *port = "7471";
 
-#define PRINT_LINE printf("line: %d\n", __LINE__);
 
 struct rdma_cm_id *listen_id, *id;
 struct ibv_mr *mr;
-char send_msg[16] = "hello world:";
-//uint8_t send_msg[16];
-char recv_msg[16] = "fuck\0";
-//uint8_t recv_msg[16];
+char send_msg[MESSAGE_LEN] = "hello world:";
+//uint8_t send_msg[MESSAGE_LEN];
+char recv_msg[MESSAGE_LEN] = "fuck\0";
+//uint8_t recv_msg[MESSAGE_LEN];
 
 static int run(void)
 {
@@ -33,6 +32,7 @@ static int run(void)
 		struct ibv_wc wc;
 		int ret;
 
+		printf("%lf", 1.0 * CLOCKS_PER_SEC);
 		
 		memset(&hints, 0, sizeof hints);
 		hints.ai_flags = RAI_PASSIVE;
@@ -43,10 +43,11 @@ static int run(void)
 				printf("rdma_getaddrinfo %d\n", errno);
 				return ret;
 		}
+		//
+		//	ret = rdma_create_ep(&listen_id, res, NULL, &attr);
 
 		struct rdma_event_channel *event_channel = rdma_create_event_channel();
 		//
-		//	ret = rdma_create_ep(&listen_id, res, NULL, &attr);
 
 		ret = rdma_create_id(event_channel, &listen_id, NULL, RDMA_PS_TCP);
 		if (ret) {
@@ -83,15 +84,16 @@ static int run(void)
 		}
 */
 		memset(&attr, 0, sizeof attr);
-		attr.cap.max_send_wr = attr.cap.max_recv_wr = 10000;
+		attr.cap.max_send_wr = attr.cap.max_recv_wr = iter_num;
 		attr.cap.max_send_sge = attr.cap.max_recv_sge = 1;
-		attr.cap.max_inline_data = 16;
+		attr.cap.max_inline_data = MESSAGE_LEN;
 		attr.sq_sig_all = 1;
 		attr.qp_type = IBV_QPT_RC;
 
 
 		PRINT_LINE
 		ret = rdma_listen(listen_id, 0);
+		PRINT_TIME PRINT_LINE
 		if (ret) {
 				printf("rdma_listen %d\n", errno);
 				return ret;
@@ -116,6 +118,7 @@ static int run(void)
 */
 		struct rdma_cm_event *event;
 		ret = rdma_get_cm_event(listen_id->channel, &event);
+		PRINT_TIME PRINT_LINE
 		if (ret) {
 				printf("rdma_get_cm_event %s\n", strerror(errno));
 				return ret;
@@ -128,7 +131,7 @@ static int run(void)
 		id = event->id;
 
 		rdma_ack_cm_event(listen_id->event);
-
+		PRINT_TIME PRINT_LINE
 /*
  * FIXME
 		ret = rdma_get_request(listen_id, &id);
@@ -142,6 +145,7 @@ static int run(void)
 
 		struct ibv_pd *pd;
 		pd = ibv_alloc_pd(id->verbs);
+		PRINT_TIME PRINT_LINE
 		if (!pd) {
 				printf("ibv_alloc_pd: %s\n", strerror(errno));
 				return 1;
@@ -149,6 +153,7 @@ static int run(void)
 
 		struct ibv_comp_channel *comp_channel;
 		comp_channel = ibv_create_comp_channel(id->verbs);
+		PRINT_TIME PRINT_LINE
 		if (!comp_channel) {
 				printf("ibv_create_comp_channel: %s\n", strerror(errno));
 				return 1;
@@ -156,12 +161,14 @@ static int run(void)
 
 		struct ibv_cq *cq;
 		cq = ibv_create_cq(id->verbs, 2, NULL, comp_channel, 0);
+		PRINT_TIME PRINT_LINE
 		if (!cq) {
 				printf("ibv_create_cq %s\n", strerror(errno));
 				return 1;
 		}
 
 		ret = ibv_req_notify_cq(cq, 0);
+		PRINT_TIME PRINT_LINE
 		if (ret) {
 				printf("ibv_req_notify_cq: %s\n", strerror(errno));
 				return ret;
@@ -169,18 +176,20 @@ static int run(void)
 
 		PRINT_LINE
 		ret = rdma_create_qp(id, pd, &attr); 
+		PRINT_TIME PRINT_LINE
 		if (ret) {
 				printf("rdma_create_qp: %s\n", strerror(errno));
 				return ret;
 		}
 
-		mr = rdma_reg_msgs(id, send_msg, 16);
+		mr = rdma_reg_msgs(id, send_msg, MESSAGE_LEN);
+		PRINT_TIME PRINT_LINE
 		if (!mr) {
 				printf("rdma_reg_msgs %d\n", errno);
 				return ret;
 		}
 		/*
-		   ret = rdma_post_recv(id, NULL, recv_msg, 16, mr);
+		   ret = rdma_post_recv(id, NULL, recv_msg, MESSAGE_LEN, mr);
 		   if (ret) {
 		   printf("rdma_post_recv %d\n", errno);
 		   return ret;
@@ -188,13 +197,14 @@ static int run(void)
 		   */
 
 		ret = rdma_accept(id, NULL);
+		PRINT_TIME PRINT_LINE
 		if (ret) {
 				printf("rdma_accept %d\n", errno);
 				return ret;
 		}
 
 		/*
-		   ret = rdma_post_recv(id, NULL, recv_msg, 16, mr);
+		   ret = rdma_post_recv(id, NULL, recv_msg, MESSAGE_LEN, mr);
 		   if (ret) {
 		   printf("rdma_post_recv %d\n", errno);
 		   return ret;
@@ -209,15 +219,17 @@ static int run(void)
 		   */
 
 		int i;
-		long begin_time = time_sec;
+		PRINT_TIME PRINT_LINE
+		clock_t begin_time = clock();
 		for (i = 0; i < iter_num; i ++ ) {
 				send_msg[12] = 'a' + i % 26;
 				send_msg[13] = '\0';
-				printf("send_msg:%s\n", send_msg);	
+//				printf("send_msg:%s\n", send_msg);	
 				//printf("IBV_SEND_INLINE is %d", IBV_SEND_SOLICITED);
 				//printf("IBV_SEND_INLINE is %d", IBV_SEND_INLINE);
-				ret = rdma_post_send(id, NULL, send_msg, 16, mr, IBV_SEND_INLINE);
-				//ret = rdma_post_send(id, NULL, send_msg, 16, mr, IBV_SEND_SOLICITED);
+//				ret = rdma_post_send(id, NULL, send_msg, MESSAGE_LEN, mr, 0);
+				ret = rdma_post_send(id, NULL, send_msg, MESSAGE_LEN, mr, IBV_SEND_INLINE);
+				//ret = rdma_post_send(id, NULL, send_msg, MESSAGE_LEN, mr, IBV_SEND_SOLICITED);
 				/*
 				 * difference in IBV_SEND_FENCE
 				 * 				IBV_SEND_SIGNALED
@@ -237,7 +249,8 @@ static int run(void)
 				}
 
 		}
-		long end_time = time_sec;
+		PRINT_TIME PRINT_LINE
+		clock_t end_time = clock();
 		/*
 		   ret = rdma_accept(id, NULL);
 		   if (ret) {
@@ -245,12 +258,18 @@ static int run(void)
 		   return ret;
 		   }
 		   */
-		printf("Total time is %ld\n", end_time - begin_time);
+		printf("Total time is %ld\n", (end_time - begin_time) * 1000 / CLOCKS_PER_SEC);
 
+		PRINT_LINE
 		rdma_disconnect(id);
+		PRINT_LINE
 		rdma_dereg_mr(mr);
-		rdma_destroy_ep(id);
-		rdma_destroy_ep(listen_id);
+		rdma_destroy_id(id);
+		rdma_destroy_id(listen_id);
+		rdma_destroy_event_channel(event_channel);
+//		rdma_dereg_mr(mr);
+//		rdma_destroy_ep(id);
+//		rdma_destroy_ep(listen_id);
 		return 0;
 }
 

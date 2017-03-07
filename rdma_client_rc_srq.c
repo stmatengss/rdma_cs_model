@@ -43,7 +43,7 @@ static int run(void)
 	attr.cap.max_inline_data = 16;
 	attr.qp_type = IBV_QPT_RC;
 	attr.qp_context = id;
-	attr.sq_sig_all = 1;
+	attr.sq_sig_all = 0;
 	ret = rdma_create_ep(&id, res, NULL, &attr);
 	
 	rdma_freeaddrinfo(res);
@@ -69,7 +69,7 @@ static int run(void)
 	printf("rdma_connect_success!\n");
 */
 	int i;
-	clock_t begin_time = clock();
+	long begin_time = time_sec;
 /*	
 	ret = rdma_post_recv(id, NULL, recv_msg, 16, mr);
 	if (ret) {
@@ -96,7 +96,7 @@ static int run(void)
 
 	ret = rdma_connect(id, NULL);
 	if (ret) {
-		printf("rdma_connect %s\n", strerror(errno));
+		printf("rdma_connect %d\n", ret);
 		return 1;
 	}
 
@@ -106,12 +106,12 @@ static int run(void)
 					printf("rdma_get_rec_comp %d\n", ret);
 					return 1;
 			}
-//			printf("inf(after):%s\n", recv_msg);
+			printf("inf(after):%s\n", recv_msg);
 	}
 
-	clock_t end_time = clock();
+	long end_time = time_sec;
 
-	printf("Total time is %ld\n", (end_time - begin_time) * 1000 / CLOCKS_PER_SEC);
+	printf("Total time is %ld\n", end_time - begin_time);
 
 	rdma_disconnect(id);
 	rdma_dereg_mr(mr);
