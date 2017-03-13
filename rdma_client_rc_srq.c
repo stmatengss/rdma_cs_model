@@ -38,61 +38,15 @@ static int run(void)
 	}
 
 	memset(&attr, 0, sizeof attr);
-	attr.cap.max_send_wr = attr.cap.max_recv_wr = 10000;
+	attr.cap.max_send_wr = attr.cap.max_recv_wr = 1;
 	attr.cap.max_send_sge = attr.cap.max_recv_sge = 1;
-	attr.cap.max_inline_data = 16;
-	attr.qp_type = IBV_QPT_RC;
-	attr.qp_context = id;
-	attr.sq_sig_all = 0;
+	attr.sq_sig_all = 1;
 	ret = rdma_create_ep(&id, res, NULL, &attr);
 	
 	rdma_freeaddrinfo(res);
 	if (ret) {
 		printf("rdma_create_ep %d\n", errno);
 		return ret;
-	}
-
-	printf("inf(pre):%s\n", recv_msg);
-
-	mr = rdma_reg_msgs(id, recv_msg, 16);
-	if (!mr) {
-		printf("rdma_reg_msgs %d\n", errno);
-
-		return ret;
-	}
-/*
-	ret = rdma_connect(id, NULL);
-	if (ret) {
-		printf("rdma_connect %d\n", errno);
-		return ret;
-	}
-	printf("rdma_connect_success!\n");
-*/
-	int i;
-	long begin_time = time_sec;
-/*	
-	ret = rdma_post_recv(id, NULL, recv_msg, 16, mr);
-	if (ret) {
-			printf("rdma_post_recv %d\n", errno);
-			return ret;
-	}
-*/
-	for (i = 0; i < iter_num; i ++ ) {
-/*
-		ret = rdma_get_recv_comp(id, &wc);
-		if (ret <= 0) {
-			printf("rdma_get_rec_comp %d\n", ret);
-			return 1;
-		}
-*/
-		ret = rdma_post_recv(id, NULL, recv_msg, 16, mr);
-		if (ret) {
-			printf("rdma_post_recv %d\n", errno);
-			return ret;
-		}
-
-//		printf("inf(pre):%s\n", recv_msg);
-	}
 
 	ret = rdma_connect(id, NULL);
 	if (ret) {
@@ -100,18 +54,46 @@ static int run(void)
 		return 1;
 	}
 
+	int srqn = ntohl(*(uint32_t *) id->event->param.conn.private_data);
+
+	/*
+	 * send message
+	 * */
+	struct ibv_send_wr wr, *bad;
+	struct ibv_sge sge;
+
+	sge.addr = (uint64_t) (uintptr_t) send_msg;
+	sge.length = (uint32_t) sizeof (send_msg);
+	sge.lkey = 0;
+	wr.wr_id = (uintptr_t) NULL;
+	wr.next = NULL;
+	wr.sg_list = &sge;
+	wr.num_sge = 1;
+	wr.opcode = IBV_WR_SEND;
+	wr.send_flags = IBV_SEND_INLINE;
+	wr.qp_type.xrc.remote_srqn = srqn;
+
+	ret = ibv_post_send(id->qp, &wr, &bad);
+	if (ret) {	
+			printf("ibv_post_send: %s\n", strerror(errno));
+			return ret;
+	}
+
+	clock_t begin_time = clock();
+
+	int i;
 	for (i = 0; i < iter_num; i ++ ) {
-			ret = rdma_get_recv_comp(id, &wc);
+			ret = rdma_get_send_comp(id, &wc);
 			if (ret <= 0) {
-					printf("rdma_get_rec_comp %d\n", ret);
+					printf("rdma_get_send_comp %d\n", ret);
 					return 1;
 			}
 			printf("inf(after):%s\n", recv_msg);
 	}
 
-	long end_time = time_sec;
+	clock_t end_time =clock();
 
-	printf("Total time is %ld\n", end_time - begin_time);
+	printf("Total time is %ld\n", (long)(end_time - begin_time));
 
 	rdma_disconnect(id);
 	rdma_dereg_mr(mr);
@@ -144,3 +126,4 @@ int main(int argc, char **argv)
 	printf("rdma_client: end %d\n", ret);
 	return ret;
 }
+
