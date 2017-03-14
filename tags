@@ -4,76 +4,194 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-EXE	Makefile	/^EXE = rdma_server_w rdma_client_w rdma_server_rc rdma_client_rc rdma_client_rc_us rdma_server_rc_us \\$/;"	m
-buffer_addr	rdma_client_rc_w.c	/^		uint64_t buffer_addr;$/;"	m	struct:common_priv_data	file:
-buffer_addr	rdma_server_rc_w.c	/^		uint64_t buffer_addr;$/;"	m	struct:common_priv_data	file:
-buffer_length	rdma_client_rc_w.c	/^		size_t   buffer_length;$/;"	m	struct:common_priv_data	file:
-buffer_length	rdma_server_rc_w.c	/^		size_t   buffer_length;$/;"	m	struct:common_priv_data	file:
-buffer_rkey	rdma_client_rc_w.c	/^		uint32_t buffer_rkey;$/;"	m	struct:common_priv_data	file:
-buffer_rkey	rdma_server_rc_w.c	/^		uint32_t buffer_rkey;$/;"	m	struct:common_priv_data	file:
-common_priv_data	rdma_client_rc_w.c	/^struct common_priv_data {$/;"	s	file:
-common_priv_data	rdma_server_rc_w.c	/^struct common_priv_data {$/;"	s	file:
+EXE	Makefile	/^EXE = rdma_server_rc rdma_client_rc rdma_client_rc_us rdma_server_rc_us \\$/;"	m
+MESSAGE_LEN	define.h	15;"	d
+PRINT_LINE	define.h	14;"	d
+PRINT_TIME	define.h	13;"	d
+addr_handler	rdma_server_client_ud_imm.c	/^static int addr_handler(struct cmatest_node *node) {$/;"	f	file:
+ah	rdma_server_client_ud_imm.c	/^		struct ibv_ah *ah;$/;"	m	struct:cmatest_node	typeref:struct:cmatest_node::ibv_ah	file:
+alloc_nodes	rdma_server_client_ud_imm.c	/^static int alloc_nodes(void) {$/;"	f	file:
+back_mr	rdma_client_rc_w.c	/^struct ibv_mr *back_mr;$/;"	v	typeref:struct:ibv_mr
+back_mr	rdma_client_ud.c	/^struct ibv_mr *back_mr;$/;"	v	typeref:struct:ibv_mr
+back_msg	rdma_client_rc_w.c	/^char back_msg[16] = "";$/;"	v
+back_msg	rdma_client_ud.c	/^char back_msg[16] = "";$/;"	v
+buffer_addr	define.h	/^		uint64_t buffer_addr;$/;"	m	struct:common_priv_data
+buffer_addr	rdma_client_ud.c	/^		uint64_t buffer_addr;$/;"	m	struct:common_priv_data	file:
+buffer_addr	rdma_server_ud.c	/^		uint64_t buffer_addr;$/;"	m	struct:common_priv_data	file:
+buffer_length	define.h	/^		size_t   buffer_length;$/;"	m	struct:common_priv_data
+buffer_length	rdma_client_ud.c	/^		size_t   buffer_length;$/;"	m	struct:common_priv_data	file:
+buffer_length	rdma_server_ud.c	/^		size_t   buffer_length;$/;"	m	struct:common_priv_data	file:
+buffer_rkey	define.h	/^		uint32_t buffer_rkey;$/;"	m	struct:common_priv_data
+buffer_rkey	rdma_client_ud.c	/^		uint32_t buffer_rkey;$/;"	m	struct:common_priv_data	file:
+buffer_rkey	rdma_server_ud.c	/^		uint32_t buffer_rkey;$/;"	m	struct:common_priv_data	file:
+channel	rdma_server_client_ud_imm.c	/^		struct rdma_event_channel *channel;$/;"	m	struct:cmatest	typeref:struct:cmatest::rdma_event_channel	file:
+cma_handler	rdma_server_client_ud_imm.c	/^static int cma_handler(struct rdma_cm_id *cma_id, struct rdma_cm_event *event) {$/;"	f	file:
+cma_id	rdma_server_client_ud_imm.c	/^		struct rdma_cm_id *cma_id;$/;"	m	struct:cmatest_node	typeref:struct:cmatest_node::rdma_cm_id	file:
+cmatest	rdma_server_client_ud_imm.c	/^struct cmatest {$/;"	s	file:
+cmatest_node	rdma_server_client_ud_imm.c	/^struct cmatest_node {$/;"	s	file:
+common_priv_data	define.h	/^struct common_priv_data {$/;"	s
+common_priv_data	rdma_client_ud.c	/^struct common_priv_data {$/;"	s	file:
+common_priv_data	rdma_server_ud.c	/^struct common_priv_data {$/;"	s	file:
+conn_index	rdma_server_client_ud_imm.c	/^		int conn_index;$/;"	m	struct:cmatest	file:
+connect_error	rdma_server_client_ud_imm.c	/^static void connect_error(void) {$/;"	f	file:
+connect_events	rdma_server_client_ud_imm.c	/^static int connect_events(void) {$/;"	f	file:
+connected	rdma_server_client_ud_imm.c	/^		int connected;$/;"	m	struct:cmatest_node	file:
+connections	rdma_server_client_ud_imm.c	/^static int connections = 1;$/;"	v	file:
+connects_left	rdma_server_client_ud_imm.c	/^		int connects_left;$/;"	m	struct:cmatest	file:
+cq	rdma_server_client_ud_imm.c	/^		struct ibv_cq *cq;$/;"	m	struct:cmatest_node	typeref:struct:cmatest_node::ibv_cq	file:
+create_message	rdma_server_client_ud_imm.c	/^static int create_message(struct cmatest_node *node) {$/;"	f	file:
+destroy_node	rdma_server_client_ud_imm.c	/^static void destroy_node(struct cmatest_node *node) {$/;"	f	file:
+destroy_nodes	rdma_server_client_ud_imm.c	/^static void destroy_nodes(void) {$/;"	f	file:
+dst_addr	rdma_server_client_ud_imm.c	/^		struct sockaddr *dst_addr;$/;"	m	struct:cmatest	typeref:struct:cmatest::sockaddr	file:
+dst_addr	rdma_server_client_ud_imm.c	/^static char *dst_addr;$/;"	v	file:
+get_addr	rdma_server_client_ud_imm.c	/^static int get_addr(char *dst, struct sockaddr *addr) {$/;"	f	file:
+id	rdma_client_atomic_cas.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
 id	rdma_client_rc.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
+id	rdma_client_rc_srq.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
 id	rdma_client_rc_us.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
 id	rdma_client_rc_w.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
+id	rdma_client_uc.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
+id	rdma_client_ud.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
 id	rdma_client_w.c	/^struct rdma_cm_id *id;$/;"	v	typeref:struct:rdma_cm_id
+id	rdma_server_atomic_cas.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
+id	rdma_server_client_ud_imm.c	/^		int id;$/;"	m	struct:cmatest_node	file:
 id	rdma_server_rc.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
+id	rdma_server_rc_srq.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
 id	rdma_server_rc_us.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
 id	rdma_server_rc_w.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
+id	rdma_server_uc.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
+id	rdma_server_ud.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
 id	rdma_server_w.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:
+init_node	rdma_server_client_ud_imm.c	/^static int init_node(struct cmatest_node *node) {$/;"	f	file:
+is_sender	rdma_server_client_ud_imm.c	/^static int is_sender;$/;"	v	file:
 iter_num	define.h	/^const int iter_num = 10000;$/;"	v
+join_handler	rdma_server_client_ud_imm.c	/^static int join_handler(struct cmatest_node *node,$/;"	f	file:
+listen_id	rdma_server_atomic_cas.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
 listen_id	rdma_server_rc.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
+listen_id	rdma_server_rc_srq.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
 listen_id	rdma_server_rc_us.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
 listen_id	rdma_server_rc_w.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
+listen_id	rdma_server_uc.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
+listen_id	rdma_server_ud.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
 listen_id	rdma_server_w.c	/^struct rdma_cm_id *listen_id, *id;$/;"	v	typeref:struct:rdma_cm_id
+main	rdma_client_atomic_cas.c	/^int main(int argc, char **argv)$/;"	f
 main	rdma_client_rc.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_client_rc_srq.c	/^int main(int argc, char **argv)$/;"	f
 main	rdma_client_rc_us.c	/^int main(int argc, char **argv)$/;"	f
 main	rdma_client_rc_w.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_client_uc.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_client_ud.c	/^int main(int argc, char **argv)$/;"	f
 main	rdma_client_w.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_server_atomic_cas.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_server_client_ud_imm.c	/^int main(int argc, char **argv) {$/;"	f
 main	rdma_server_rc.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_server_rc_srq.c	/^int main(int argc, char **argv)$/;"	f
 main	rdma_server_rc_us.c	/^int main(int argc, char **argv)$/;"	f
 main	rdma_server_rc_w.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_server_uc.c	/^int main(int argc, char **argv)$/;"	f
+main	rdma_server_ud.c	/^int main(int argc, char **argv)$/;"	f
 main	rdma_server_w.c	/^int main(int argc, char **argv)$/;"	f
+mcast_ip	rdma_server_ud.c	/^char *mcast_ip = "127.0.0.1";$/;"	v
+mem	rdma_server_client_ud_imm.c	/^		void *mem;$/;"	m	struct:cmatest_node	file:
+message_count	rdma_server_client_ud_imm.c	/^static int message_count = 10;$/;"	v	file:
+message_size	rdma_server_client_ud_imm.c	/^static int message_size = 100;$/;"	v	file:
+mr	rdma_client_atomic_cas.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
 mr	rdma_client_rc.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_client_rc_srq.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
 mr	rdma_client_rc_us.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
 mr	rdma_client_rc_w.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_client_uc.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_client_ud.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
 mr	rdma_client_w.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_server_atomic_cas.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_server_client_ud_imm.c	/^		struct ibv_mr *mr;$/;"	m	struct:cmatest_node	typeref:struct:cmatest_node::ibv_mr	file:
 mr	rdma_server_rc.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_server_rc_srq.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
 mr	rdma_server_rc_us.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
 mr	rdma_server_rc_w.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_server_uc.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+mr	rdma_server_ud.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
 mr	rdma_server_w.c	/^struct ibv_mr *mr;$/;"	v	typeref:struct:ibv_mr
+nodes	rdma_server_client_ud_imm.c	/^		struct cmatest_node *nodes;$/;"	m	struct:cmatest	typeref:struct:cmatest::cmatest_node	file:
+pd	rdma_server_client_ud_imm.c	/^		struct ibv_pd *pd;$/;"	m	struct:cmatest_node	typeref:struct:cmatest_node::ibv_pd	file:
+poll_cqs	rdma_server_client_ud_imm.c	/^static int poll_cqs(void) {$/;"	f	file:
+port	rdma_client_atomic_cas.c	/^static char *port = "7471";$/;"	v	file:
 port	rdma_client_rc.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_client_rc_srq.c	/^static char *port = "7471";$/;"	v	file:
 port	rdma_client_rc_us.c	/^static char *port = "7471";$/;"	v	file:
 port	rdma_client_rc_w.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_client_uc.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_client_ud.c	/^static char *port = "7471";$/;"	v	file:
 port	rdma_client_w.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_server_atomic_cas.c	/^static char *port = "7471";$/;"	v	file:
 port	rdma_server_rc.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_server_rc_srq.c	/^static char *port = "7471";$/;"	v	file:
 port	rdma_server_rc_us.c	/^static char *port = "7471";$/;"	v	file:
 port	rdma_server_rc_w.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_server_uc.c	/^static char *port = "7471";$/;"	v	file:
+port	rdma_server_ud.c	/^static char *port = "7471";$/;"	v	file:
 port	rdma_server_w.c	/^static char *port = "7471";$/;"	v	file:
+port_space	rdma_server_client_ud_imm.c	/^static enum rdma_port_space port_space = RDMA_PS_UDP;$/;"	v	typeref:enum:rdma_port_space	file:
+post_recvs	rdma_server_client_ud_imm.c	/^static int post_recvs(struct cmatest_node *node) {$/;"	f	file:
+post_sends	rdma_server_client_ud_imm.c	/^static int post_sends(struct cmatest_node *node, int signal_flag) {$/;"	f	file:
+recv_msg	rdma_client_atomic_cas.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
 recv_msg	rdma_client_rc.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_client_rc_srq.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
 recv_msg	rdma_client_rc_us.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_client_uc.c	/^char recv_msg[MESSAGE_LEN] = "fuck\\0";$/;"	v
 recv_msg	rdma_client_w.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
-recv_msg	rdma_server_rc.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_server_atomic_cas.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_server_rc.c	/^char recv_msg[MESSAGE_LEN] = "fuck\\0";$/;"	v
+recv_msg	rdma_server_rc_srq.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
 recv_msg	rdma_server_rc_us.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+recv_msg	rdma_server_uc.c	/^char recv_msg[MESSAGE_LEN] = "fuck\\0";$/;"	v
 recv_msg	rdma_server_w.c	/^char recv_msg[16] = "fuck\\0";$/;"	v
+remote_qkey	rdma_server_client_ud_imm.c	/^		uint32_t remote_qkey;$/;"	m	struct:cmatest_node	file:
+remote_qpn	rdma_server_client_ud_imm.c	/^		uint32_t remote_qpn;$/;"	m	struct:cmatest_node	file:
+run	rdma_client_atomic_cas.c	/^static int run(void)$/;"	f	file:
 run	rdma_client_rc.c	/^static int run(void)$/;"	f	file:
+run	rdma_client_rc_srq.c	/^static int run(void)$/;"	f	file:
 run	rdma_client_rc_us.c	/^static int run(void)$/;"	f	file:
 run	rdma_client_rc_w.c	/^static int run(void)$/;"	f	file:
+run	rdma_client_uc.c	/^static int run(void)$/;"	f	file:
+run	rdma_client_ud.c	/^static int run(void)$/;"	f	file:
 run	rdma_client_w.c	/^static int run(void)$/;"	f	file:
+run	rdma_server_atomic_cas.c	/^static int run(void)$/;"	f	file:
+run	rdma_server_client_ud_imm.c	/^static int run(void) {$/;"	f	file:
 run	rdma_server_rc.c	/^static int run(void)$/;"	f	file:
+run	rdma_server_rc_srq.c	/^static int run(void)$/;"	f	file:
 run	rdma_server_rc_us.c	/^static int run(void)$/;"	f	file:
 run	rdma_server_rc_w.c	/^static int run(void)$/;"	f	file:
+run	rdma_server_uc.c	/^static int run(void)$/;"	f	file:
+run	rdma_server_ud.c	/^static int run(void)$/;"	f	file:
 run	rdma_server_w.c	/^static int run(void)$/;"	f	file:
+send_msg	rdma_client_atomic_cas.c	/^char send_msg[16] = "hello world\\0";$/;"	v
 send_msg	rdma_client_rc.c	/^char send_msg[16] = "hello world\\0";$/;"	v
+send_msg	rdma_client_rc_srq.c	/^char send_msg[16] = "hello world\\0";$/;"	v
 send_msg	rdma_client_rc_us.c	/^char send_msg[16] = "hello world\\0";$/;"	v
+send_msg	rdma_client_uc.c	/^char send_msg[MESSAGE_LEN] = "hello world\\0";$/;"	v
 send_msg	rdma_client_w.c	/^char send_msg[16] = "hello world\\0";$/;"	v
-send_msg	rdma_server_rc.c	/^char send_msg[16] = "hello world:";$/;"	v
+send_msg	rdma_server_atomic_cas.c	/^char send_msg[16] = "hello world:";$/;"	v
+send_msg	rdma_server_rc.c	/^char send_msg[MESSAGE_LEN] = "hello world:";$/;"	v
+send_msg	rdma_server_rc_srq.c	/^char send_msg[16] = "hello world:";$/;"	v
 send_msg	rdma_server_rc_us.c	/^char send_msg[16] = "hello world:";$/;"	v
+send_msg	rdma_server_uc.c	/^char send_msg[MESSAGE_LEN] = "hello world:";$/;"	v
 send_msg	rdma_server_w.c	/^char send_msg[16] = "hello world:";$/;"	v
+server	rdma_client_atomic_cas.c	/^static char *server = "127.0.0.1";$/;"	v	file:
 server	rdma_client_rc.c	/^static char *server = "127.0.0.1";$/;"	v	file:
+server	rdma_client_rc_srq.c	/^static char *server = "127.0.0.1";$/;"	v	file:
 server	rdma_client_rc_us.c	/^static char *server = "127.0.0.1";$/;"	v	file:
 server	rdma_client_rc_w.c	/^static char *server = "127.0.0.1";$/;"	v	file:
+server	rdma_client_uc.c	/^static char *server = "127.0.0.1";$/;"	v	file:
+server	rdma_client_ud.c	/^static char *server = "127.0.0.1";$/;"	v	file:
 server	rdma_client_w.c	/^static char *server = "127.0.0.1";$/;"	v	file:
-time_sec	define.h	6;"	d
-wr_msg	rdma_client_rc_w.c	/^char wr_msg[16] = "hello world\\0";$/;"	v
-wr_msg	rdma_server_rc_w.c	/^char wr_msg[16] = "hello world:";$/;"	v
+src_addr	rdma_server_client_ud_imm.c	/^		struct sockaddr *src_addr;$/;"	m	struct:cmatest	typeref:struct:cmatest::sockaddr	file:
+src_addr	rdma_server_client_ud_imm.c	/^static char *src_addr;$/;"	v	file:
+test	rdma_server_client_ud_imm.c	/^static struct cmatest test;$/;"	v	typeref:struct:cmatest	file:
+time_sec	define.h	12;"	d
+unmapped_addr	rdma_server_client_ud_imm.c	/^static int unmapped_addr;$/;"	v	file:
+verify_test_params	rdma_server_client_ud_imm.c	/^static int verify_test_params(struct cmatest_node *node) {$/;"	f	file:
+wr_msg	rdma_client_rc_w.c	/^char wr_msg[32] = "hello world\\0";$/;"	v
+wr_msg	rdma_client_ud.c	/^char wr_msg[32] = "hello world\\0";$/;"	v
+wr_msg	rdma_server_rc_w.c	/^char wr_msg[16] = "";$/;"	v
+wr_msg	rdma_server_ud.c	/^char wr_msg[16] = "";$/;"	v

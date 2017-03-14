@@ -47,7 +47,7 @@ static int run(void)
 	if (ret) {
 		printf("rdma_create_ep %d\n", errno);
 		return ret;
-
+	}	
 	ret = rdma_connect(id, NULL);
 	if (ret) {
 		printf("rdma_connect %d\n", ret);
@@ -122,8 +122,7 @@ int main(int argc, char **argv)
 	}
 
 	printf("rdma_client: start\n");
-	ret = run();
+	//ret = run();
 	printf("rdma_client: end %d\n", ret);
-	return ret;
+	return 0;
 }
-

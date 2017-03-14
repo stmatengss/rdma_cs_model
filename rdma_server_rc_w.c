@@ -22,12 +22,6 @@ char wr_msg[16] = "";
 //uint8_t send_msg[16];
 //char recv_msg[16] = "fuck\0";
 //uint8_t recv_msg[16];
-struct common_priv_data {
-
-		uint64_t buffer_addr;
-		uint32_t buffer_rkey;
-		size_t   buffer_length;
-};
 
 static int run(void)
 {

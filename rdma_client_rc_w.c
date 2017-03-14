@@ -13,12 +13,6 @@
 #include <rdma/rdma_verbs.h>
 #include "define.h"
 
-struct common_priv_data {
-
-		uint64_t buffer_addr;
-		uint32_t buffer_rkey;
-		size_t   buffer_length;
-};
 
 static char *server = "127.0.0.1";
 static char *port = "7471";
@@ -69,29 +63,10 @@ static int run(void)
 
 				return ret;
 		}
-/*
-		back_mr = ibv_reg_mr(id->pd, back_msg, 16,
-						IBV_ACCESS_REMOTE_WRITE | IBV_ACCESS_LOCAL_WRITE |
-						IBV_ACCESS_REMOTE_READ);
-		if (!mr) {
-				printf("rdma_reg_msgs %d\n", errno);
 
-				return ret;
-		}
-		*/
 		int i;
 		long begin_time = time_sec;
 
-		/*
-		   for (i = 0; i < iter_num; i ++ ) {
-		   ret = rdma_post_recv(id, NULL, recv_msg, 16, mr);
-		   if (ret) {
-		   printf("rdma_post_recv %d\n", errno);
-		   return et;
-		   }
-
-		   }
-		   */
 		const struct common_priv_data *priv_data;
 
 		ret = rdma_connect(id, NULL);
